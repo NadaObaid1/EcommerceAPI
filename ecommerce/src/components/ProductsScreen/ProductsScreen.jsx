@@ -23,11 +23,36 @@ const ProductsScreen = () => {
   };
 
   const handleAddToCart = (product) => {
-    setCart([...cart, product]);
-    toast.success(`${product.name} added to cart!`, {
-      autoClose: 2000
+    const data = {
+      product_id: product._id,
+      quantity: 1, 
+    };
+  
+    fetch('https://ecommerce-node4-five.vercel.app/cart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY0Njc5MjF9.Qv9DkM0jRF_fKiZoelu7FlZEPOL8Dtwy3tKukJ9Ac8Q',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to add to cart');
+      }
+      return response.json();
+    })
+    .then(cartData => {
+      toast.success(`${product.name} added to cart!`, {
+        autoClose: 2000
+      });
+    })
+    .catch(error => {
+      console.error('Error adding to cart:', error);
+      toast.error('Failed to add to cart. Please try again later.');
     });
   };
+  
 
   const colors = [
     { name: 'black', count: 1 },
