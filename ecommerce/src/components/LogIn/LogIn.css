@@ -1,0 +1,10 @@
+.btn-burgundy {
+    background-color: #505b44;
+    border-color: #505b44;
+  }
+  
+  .btn-burgundy:hover {
+    background-color: #151613;
+    border-color:  #151613;
+  }
+  

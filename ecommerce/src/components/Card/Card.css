@@ -1,0 +1,44 @@
+.cards {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .card {
+    width: calc(15%); 
+    padding: 40px;
+    background-color: #f2f2f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    margin: 0 -160px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .card h4{
+    color:#070f4e;;
+  }
+  .card p{
+    font-size: 13px;
+  }
+  .person img {
+    width: 95px;
+    height: 90px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px; 
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .filled-star{
+    color: #FFD700;
+  }
+  .empty-star {
+    color: silver; 
+  }

@@ -1,0 +1,18 @@
+.background-container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.image-container {
+  flex: 1;
+}
+
+.text-container {
+  flex: 1;
+}
+
+.text-content {
+  padding: 0 40px; /* هام: لإضافة تباعد بين النص والحافة */
+}
