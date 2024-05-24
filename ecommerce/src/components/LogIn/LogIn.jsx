@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import './LogIn.css';
 
-export default function Register() {
+export default function LogIn() {
   const [errors, setErrors] = useState([]);
   const [statusErrors, setStatusErrors] = useState("");
   const [welcomeMessage, setWelcomeMessage] = useState("");
@@ -82,8 +82,12 @@ export default function Register() {
           </div>
   
           <div className="mb-3 text-danger">{statusErrors}</div>
-  
+
+          <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
           <button type="submit" className="btn btn-primary btn-burgundy my-5">Login</button>
+          <a href='/ForgetPassword'>forget password?</a>
+          </div>
+         
         </form>
   
         {welcomeMessage && (

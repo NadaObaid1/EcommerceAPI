@@ -9,7 +9,7 @@ const Cart = () => {
     fetch('https://ecommerce-node4-five.vercel.app/cart', {
       method: 'GET',
       headers: {
-        'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY0Njc5MjF9.Qv9DkM0jRF_fKiZoelu7FlZEPOL8Dtwy3tKukJ9Ac8Q',
+        'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY1MDQxNzN9.nkTP-sDM9nd5WtR1qJtxXZ8eH-qnEEHbypbkfAoqONY',
       }
     })
     .then(response => response.json())
@@ -27,7 +27,7 @@ const Cart = () => {
     fetch(`https://ecommerce-node4-five.vercel.app/cart/incraseQuantity`, {
       method: 'PATCH',
       headers: {
-        'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY0Njc5MjF9.Qv9DkM0jRF_fKiZoelu7FlZEPOL8Dtwy3tKukJ9Ac8Q',
+        'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY1MDQxNzN9.nkTP-sDM9nd5WtR1qJtxXZ8eH-qnEEHbypbkfAoqONY',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -40,7 +40,7 @@ const Cart = () => {
         fetch('https://ecommerce-node4-five.vercel.app/cart', {
         method: 'GET',
         headers: {
-          'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY0Njc5MjF9.Qv9DkM0jRF_fKiZoelu7FlZEPOL8Dtwy3tKukJ9Ac8Q',
+          'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY1MDQxNzN9.nkTP-sDM9nd5WtR1qJtxXZ8eH-qnEEHbypbkfAoqONY',
         }
       })
       .then(response => response.json())
@@ -63,7 +63,7 @@ const Cart = () => {
     fetch(`https://ecommerce-node4-five.vercel.app/cart/decraseQuantity`, {
       method: 'PATCH',
       headers: {
-        'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY0Njc5MjF9.Qv9DkM0jRF_fKiZoelu7FlZEPOL8Dtwy3tKukJ9Ac8Q',
+        'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY1MDQxNzN9.nkTP-sDM9nd5WtR1qJtxXZ8eH-qnEEHbypbkfAoqONY',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -76,7 +76,7 @@ const Cart = () => {
         fetch('https://ecommerce-node4-five.vercel.app/cart', {
         method: 'GET',
         headers: {
-          'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY0Njc5MjF9.Qv9DkM0jRF_fKiZoelu7FlZEPOL8Dtwy3tKukJ9Ac8Q',
+          'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY1MDQxNzN9.nkTP-sDM9nd5WtR1qJtxXZ8eH-qnEEHbypbkfAoqONY',
         }
       })
       .then(response => response.json())
@@ -98,7 +98,7 @@ const Cart = () => {
     fetch(`https://ecommerce-node4-five.vercel.app/cart/removeItem`, {
       method: 'PATCH',
       headers: {
-        'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY0Njc5MjF9.Qv9DkM0jRF_fKiZoelu7FlZEPOL8Dtwy3tKukJ9Ac8Q',
+        'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY1MDQxNzN9.nkTP-sDM9nd5WtR1qJtxXZ8eH-qnEEHbypbkfAoqONY',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -111,7 +111,7 @@ const Cart = () => {
         fetch('https://ecommerce-node4-five.vercel.app/cart', {
         method: 'GET',
         headers: {
-          'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY0Njc5MjF9.Qv9DkM0jRF_fKiZoelu7FlZEPOL8Dtwy3tKukJ9Ac8Q',
+          'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY1MDQxNzN9.nkTP-sDM9nd5WtR1qJtxXZ8eH-qnEEHbypbkfAoqONY',
         }
       })
       .then(response => response.json())

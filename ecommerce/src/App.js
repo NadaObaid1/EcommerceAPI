@@ -14,6 +14,9 @@ import Footer from './components/Footer/Footer.jsx';
 import ProductDetails from './components/ProductDetails/ProductDetails.jsx';
 import ProductsScreen from './components/ProductsScreen/ProductsScreen.jsx';
 import Cart from './components/Cart/Cart.jsx';
+import ForgetPassword from './components/ForgetPassword/ForgetPassword.jsx';
+import Sendcode from './components/SendCode/SendCode.jsx';
+import Profile from './components/Profile/Pofile.jsx';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -42,6 +45,9 @@ export default function App() {
           <Route path="ProductsScreen" element={<ProductsScreen />} />
           <Route path="Register" element={<Register />} />
           <Route path="LogIn" element={<LogIn info={saveCurrentUser} />} />
+          <Route path="ForgetPassword" element={<ForgetPassword />} />
+          <Route path="SendCode" element={<Sendcode />} />
+          <Route path="Profile" element={<Profile />} />
           <Route path="Footer" element={<Footer />} />
           <Route path="*" element={<NotFound />} />
         </Route>

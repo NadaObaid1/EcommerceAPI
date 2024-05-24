@@ -7,4 +7,10 @@
     background-color: #151613;
     border-color:  #151613;
   }
+  a{
+    text-transform: capitalize;
+    color: #151613;
+    text-decoration: none;
+    font-weight: 500;
+  }
   

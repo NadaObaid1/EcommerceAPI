@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebook,
   faTwitter,
@@ -63,8 +63,8 @@ export default function Navbar() {
               className="social-icons"
               style={{ display: "flex", gap: "10px" }}
             >
-              <Link to="#">
-                <FontAwesomeIcon icon={faFacebook} color={Colors.secondary} />
+              <Link to="Profile">
+                <FontAwesomeIcon icon={faUser} color={Colors.secondary} />
               </Link>
               <Link to="#">
                 <FontAwesomeIcon icon={faInstagram} color={Colors.secondary} />
