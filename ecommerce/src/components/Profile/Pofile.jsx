@@ -4,13 +4,31 @@ import axios from 'axios';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState(null);
+  const [token, setToken] = useState('');
+
+  useEffect(() => {
+    const signIn = async () => {
+      try {
+        const response = await axios.post(`https://ecommerce-node4-five.vercel.app/auth/signin`, {
+          email: 'nada.s.obaidd@gmail.com',
+          password: '12345',
+        });
+        const accessToken = response.data.token;
+        setToken(accessToken);
+      } catch (error) {
+        console.error('Error signing in:', error);
+      }
+    };
+
+    signIn();
+  }, []);
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get(`https://ecommerce-node4-five.vercel.app/user/profile`, {
           headers: {
-            Authorization: `Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY1MTA4NjZ9.oZbZ-uwoNxDFl6ysDhTf_Q8kI-4ZCNwJYjq5kEdq42A`,
+            Authorization: `Tariq__${token}`,
           },
         });
         setProfileData(response.data.user);
@@ -19,8 +37,10 @@ const Profile = () => {
       }
     };
 
-    fetchProfile();
-  }, []);
+    if (token) {
+      fetchProfile();
+    }
+  }, [token]);
 
   return (
     <div>

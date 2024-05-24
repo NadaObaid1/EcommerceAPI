@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
+import axios from 'axios';
 import {
   faFacebook,
   faTwitter,
@@ -13,8 +14,49 @@ const navTextStyle = {
   fontFamily: "Lobster, cursive",
   fontWeight: "bold",
 };
-
 export default function Navbar() {
+  const [token, setToken] = useState('');
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const signIn = async () => {
+      try {
+        const response = await axios.post(`https://ecommerce-node4-five.vercel.app/auth/signin`, {
+          email: 'nada.s.obaidd@gmail.com',
+          password: '12345',
+        });
+        const accessToken = response.data.token;
+        setToken(accessToken);
+      } catch (error) {
+        console.error('Error signing in:', error);
+      }
+    };
+
+    signIn();
+  }, []);
+
+  const fetchCartItems = async () => {
+    try {
+      const response = await axios.get(`https://ecommerce-node4-five.vercel.app/cart`, {
+        headers: {
+          'Authorization': `Tariq__${token}`,
+        },
+      });
+      const data = response.data;
+      if (data.products) {
+        setCartItems(data.count);
+        await fetchCartItems();
+      }
+    } catch (error) {
+      console.error('Error fetching cart items:', error);
+    }
+  };
+  useEffect(() => {
+    if (token) {
+      fetchCartItems();
+    }
+  }, [token]);
+
   return (
       <nav>
         <div
@@ -92,7 +134,7 @@ export default function Navbar() {
                     color: Colors.secondary,
                   }}
                 >
-                  5
+                 {cartItems}
                 </div>
               </Link>
             </div>

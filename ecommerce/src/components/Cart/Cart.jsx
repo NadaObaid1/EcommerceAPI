@@ -1,132 +1,108 @@
 import React, { useState, useEffect } from 'react';
 import './Cart.css';
+import axios from 'axios';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [token, setToken] = useState('');
 
   useEffect(() => {
-    fetch('https://ecommerce-node4-five.vercel.app/cart', {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY1MDQxNzN9.nkTP-sDM9nd5WtR1qJtxXZ8eH-qnEEHbypbkfAoqONY',
+    const signIn = async () => {
+      try {
+        const response = await axios.post(`https://ecommerce-node4-five.vercel.app/auth/signin`, {
+          email: 'nada.s.obaidd@gmail.com',
+          password: '12345',
+        });
+        const accessToken = response.data.token;
+        setToken(accessToken);
+      } catch (error) {
+        console.error('Error signing in:', error);
       }
-    })
-    .then(response => response.json())
-    .then(data => {
+    };
+
+    signIn();
+  }, []);
+
+  const fetchCartItems = async () => {
+    try {
+      const response = await axios.get(`https://ecommerce-node4-five.vercel.app/cart`, {
+        headers: {
+          'Authorization': `Tariq__${token}`,
+        },
+      });
+      const data = response.data;
       if (data.products) {
         setCartItems(data.products);
         const totalPrice = data.products.reduce((total, item) => total + (item.details.finalPrice * item.quantity), 0);
         setTotalPrice(totalPrice);
       }
-    })
-    .catch(error => console.error('Error fetching cart items:', error));
-  }, []);
-
-  const handleIncreaseQuantity = (productId) => {
-    fetch(`https://ecommerce-node4-five.vercel.app/cart/incraseQuantity`, {
-      method: 'PATCH',
-      headers: {
-        'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY1MDQxNzN9.nkTP-sDM9nd5WtR1qJtxXZ8eH-qnEEHbypbkfAoqONY',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        productId: productId
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.message === 'success') {
-        fetch('https://ecommerce-node4-five.vercel.app/cart', {
-        method: 'GET',
-        headers: {
-          'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY1MDQxNzN9.nkTP-sDM9nd5WtR1qJtxXZ8eH-qnEEHbypbkfAoqONY',
-        }
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.products) {
-          setCartItems(data.products);
-          const totalPrice = data.products.reduce((total, item) => total + (item.details.finalPrice * item.quantity), 0);
-          setTotalPrice(totalPrice);
-        }
-      })
-      .catch(error => console.error('Error fetching cart items:', error));
-        
-      }
-    })
-    .catch(error => console.error('Error increasing quantity:', error));
-  };
-  
-
-  const handleDecreaseQuantity = (productId) => {
-    fetch(`https://ecommerce-node4-five.vercel.app/cart/decraseQuantity`, {
-      method: 'PATCH',
-      headers: {
-        'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY1MDQxNzN9.nkTP-sDM9nd5WtR1qJtxXZ8eH-qnEEHbypbkfAoqONY',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        productId: productId
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.message === 'success') {
-        fetch('https://ecommerce-node4-five.vercel.app/cart', {
-        method: 'GET',
-        headers: {
-          'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY1MDQxNzN9.nkTP-sDM9nd5WtR1qJtxXZ8eH-qnEEHbypbkfAoqONY',
-        }
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.products) {
-          setCartItems(data.products);
-          const totalPrice = data.products.reduce((total, item) => total + (item.details.finalPrice * item.quantity), 0);
-          setTotalPrice(totalPrice);
-        }
-      })
-      .catch(error => console.error('Error fetching cart items:', error));
-        
-      }
-    })
-    .catch(error => console.error('Error increasing quantity:', error));
+    } catch (error) {
+      console.error('Error fetching cart items:', error);
+    }
   };
 
-  const handleRemoveItem = (productId) => {
-    fetch(`https://ecommerce-node4-five.vercel.app/cart/removeItem`, {
-      method: 'PATCH',
-      headers: {
-        'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY1MDQxNzN9.nkTP-sDM9nd5WtR1qJtxXZ8eH-qnEEHbypbkfAoqONY',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+  useEffect(() => {
+    if (token) {
+      fetchCartItems();
+    }
+  }, [token]);
+
+  const handleIncreaseQuantity = async (productId) => {
+    try {
+      const response = await axios.patch(`https://ecommerce-node4-five.vercel.app/cart/incraseQuantity`, {
         productId: productId
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.message === 'success') {
-        fetch('https://ecommerce-node4-five.vercel.app/cart', {
-        method: 'GET',
+      }, {
         headers: {
-          'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY1MDQxNzN9.nkTP-sDM9nd5WtR1qJtxXZ8eH-qnEEHbypbkfAoqONY',
+          'Authorization': `Tariq__${token}`,
+          'Content-Type': 'application/json'
         }
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.products) {
-          setCartItems(data.products);
-          const totalPrice = data.products.reduce((total, item) => total + (item.details.finalPrice * item.quantity), 0);
-          setTotalPrice(totalPrice);
-        }
-      })
-      .catch(error => console.error('Error fetching cart items:', error));
-        
+      });
+
+      if (response.data.message === 'success') {
+        fetchCartItems();
       }
-    })
-    .catch(error => console.error('Error increasing quantity:', error));
+    } catch (error) {
+      console.error('Error increasing quantity:', error);
+    }
+  };
+
+  const handleDecreaseQuantity = async (productId) => {
+    try {
+      const response = await axios.patch(`https://ecommerce-node4-five.vercel.app/cart/decraseQuantity`, {
+        productId: productId
+      }, {
+        headers: {
+          'Authorization': `Tariq__${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.data.message === 'success') {
+        fetchCartItems();
+      }
+    } catch (error) {
+      console.error('Error decreasing quantity:', error);
+    }
+  };
+
+  const handleRemoveItem = async (productId) => {
+    try {
+      const response = await axios.patch(`https://ecommerce-node4-five.vercel.app/cart/removeItem`, {
+        productId: productId
+      }, {
+        headers: {
+          'Authorization': `Tariq__${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.data.message === 'success') {
+        fetchCartItems();
+      }
+    } catch (error) {
+      console.error('Error removing item:', error);
+    }
   };
 
   return (

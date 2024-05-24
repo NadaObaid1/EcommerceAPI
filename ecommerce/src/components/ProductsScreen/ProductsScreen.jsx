@@ -5,18 +5,35 @@ import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './ProductsScreen.css';
 
 const ProductsScreen = () => {
   const [sort, setSort] = useState('Default Sorting');
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
+  const [token, setToken] = useState('');
 
   useEffect(() => {
-    fetch('https://ecommerce-node4-five.vercel.app/products?page=1&limit=10')
-      .then(response => response.json())
-      .then(data => setProducts(data.products))
+    axios.get('https://ecommerce-node4-five.vercel.app/products?page=1&limit=10')
+      .then(response => setProducts(response.data.products))
       .catch(error => console.error('Error fetching products:', error));
+  }, []);
+
+  useEffect(() => {
+    const signIn = async () => {
+      try {
+        const response = await axios.post('https://ecommerce-node4-five.vercel.app/auth/signin', {
+          email: 'nada.s.obaidd@gmail.com',
+          password: '12345',
+        });
+        setToken(response.data.token);
+      } catch (error) {
+        console.error('Error signing in:', error);
+      }
+    };
+
+    signIn();
   }, []);
 
   const handleSortChange = (event) => {
@@ -24,7 +41,6 @@ const ProductsScreen = () => {
   };
 
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
   const handleAddToCart = (product) => {
     if (!product || !product._id) {
       console.error('Invalid product data:', product);
@@ -34,41 +50,29 @@ const ProductsScreen = () => {
     const data = {
       productId: product._id,
     };
-    fetch('https://ecommerce-node4-five.vercel.app/cart', {
-      method: 'POST',
+    axios.post('https://ecommerce-node4-five.vercel.app/cart', data, {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYzNzJkZWEyODFmYmEyZWFkZDkwMCIsInVzZXJOYW1lIjoiTmFkYU9iYWlkIiwicm9sZSI6IlVzZXIiLCJzdGF0dXMiOiJBY3RpdmUiLCJpYXQiOjE3MTY1MDQxNzN9.nkTP-sDM9nd5WtR1qJtxXZ8eH-qnEEHbypbkfAoqONY',
+        'Authorization': `Tariq__${token}`,
       },
-      body: JSON.stringify(data),
     })
     .then(response => {
-      console.log('Server response status:', response.status);
-      if (!response.ok) {
-        return response.json().then(errorData => {
-          console.error('Server error response:', errorData);
-          if (errorData.message === 'product already exists') {
-            toast.error('Product already exists in the cart.');
-          } else {
-            toast.error('Failed to add to cart.');
-          }
-          throw new Error(`Error: ${errorData.message}`);
-        });
+      if (!response.data) {
+        throw new Error('Failed to add to cart');
       }
-      return response.json();
-    })
-    .then(cartData => {
-      console.log('Cart data:', cartData);
       toast.success(`${product.name} added to cart!`, {
-        autoClose: 2000
+        autoClose: 2000,
       });
-      navigate('/Shop')
+      setTimeout(() => {
+        navigate('/Shop');
+      }, 2000); 
     })
     .catch(error => {
       console.error('Error adding to cart:', error.message);
+      toast.error('Failed to add to cart.');
     });
   };
-  
+
   const colors = [
     { name: 'black', count: 1 },
     { name: 'brown', count: 10 },
