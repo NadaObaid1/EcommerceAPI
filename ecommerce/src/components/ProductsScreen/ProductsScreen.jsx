@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -7,12 +7,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './ProductsScreen.css';
+import { AuthContext } from '../../AuthContext';
 
 const ProductsScreen = () => {
   const [sort, setSort] = useState('Default Sorting');
-  const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
-  const [token, setToken] = useState('');
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     axios.get('https://ecommerce-node4-five.vercel.app/products?page=1&limit=10')
@@ -23,18 +23,14 @@ const ProductsScreen = () => {
   useEffect(() => {
     const signIn = async () => {
       try {
-        const response = await axios.post('https://ecommerce-node4-five.vercel.app/auth/signin', {
-          email: 'nada.s.obaidd@gmail.com',
-          password: '12345',
-        });
-        setToken(response.data.token);
+        const response = await axios.post('https://ecommerce-node4-five.vercel.app/auth/signin')
       } catch (error) {
         console.error('Error signing in:', error);
       }
     };
 
     signIn();
-  }, []);
+  }, [token]);
 
   const handleSortChange = (event) => {
     setSort(event.target.textContent);
@@ -69,7 +65,7 @@ const ProductsScreen = () => {
     })
     .catch(error => {
       console.error('Error adding to cart:', error.message);
-      toast.error('Failed to add to cart.');
+      toast.error('Failed to add to cart, please Login before');
     });
   };
 

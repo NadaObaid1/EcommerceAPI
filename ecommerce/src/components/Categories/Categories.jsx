@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight, faEye, faHeart, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './Products.css';
+import './Categories.css';
 
-const Products = () => {
+const Categories = () => {
   const [activeList, setActiveList] = useState(1);
   const [categories, setCategories] = useState([]);
 
@@ -17,7 +17,7 @@ const Products = () => {
             Authorization: 'Tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjRmMzJmMzM2NGFkNjY0NWE3ODY3MiIsInJvbGUiOiJVc2VyIiwic3RhdHVzIjoiQWN0aXZlIiwiaWF0IjoxNzAxMTE0ODc4fQ.xQgD48OZrstfqWL96BDdLUxpoX85wXphWHlvjkm-0qE'
           }
         });
-        setCategories(data.categories); // Assuming the response contains a 'categories' array
+        setCategories(data.categories); 
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
@@ -94,4 +94,4 @@ const Products = () => {
   );
 }
 
-export default Products;
+export default Categories;

@@ -1,28 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Cart.css';
 import axios from 'axios';
+import { AuthContext } from '../../AuthContext';
 
 const Cart = () => {
+  const { token } = useContext(AuthContext); // Use token from context
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [token, setToken] = useState('');
-
-  useEffect(() => {
-    const signIn = async () => {
-      try {
-        const response = await axios.post(`https://ecommerce-node4-five.vercel.app/auth/signin`, {
-          email: 'nada.s.obaidd@gmail.com',
-          password: '12345',
-        });
-        const accessToken = response.data.token;
-        setToken(accessToken);
-      } catch (error) {
-        console.error('Error signing in:', error);
-      }
-    };
-
-    signIn();
-  }, []);
 
   const fetchCartItems = async () => {
     try {

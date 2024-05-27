@@ -1,32 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import './Profile.css'
+import React, { useEffect, useContext, useState } from 'react';
+import './Profile.css';
 import axios from 'axios';
+import { AuthContext } from '../../AuthContext';
+
 
 const Profile = () => {
+  const { token } = useContext(AuthContext);
   const [profileData, setProfileData] = useState(null);
-  const [token, setToken] = useState('');
-
-  useEffect(() => {
-    const signIn = async () => {
-      try {
-        const response = await axios.post(`https://ecommerce-node4-five.vercel.app/auth/signin`, {
-          email: 'nada.s.obaidd@gmail.com',
-          password: '12345',
-        });
-        const accessToken = response.data.token;
-        setToken(accessToken);
-      } catch (error) {
-        console.error('Error signing in:', error);
-      }
-    };
-
-    signIn();
-  }, []);
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get(`https://ecommerce-node4-five.vercel.app/user/profile`, {
+        const response = await axios.get('https://ecommerce-node4-five.vercel.app/user/profile', {
           headers: {
             Authorization: `Tariq__${token}`,
           },
@@ -64,7 +49,7 @@ const Profile = () => {
           </div>
         </div>
       ) : (
-        <p>Loading profile...</p>
+        <p style={{fontSize: '30px', color: 'red', marginBottom: '110px'}}>Please Login before...</p>
       )}
     </div>
   );

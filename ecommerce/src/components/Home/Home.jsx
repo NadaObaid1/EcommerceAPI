@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Colors } from '../Common/Color.jsx';
-import Products from '../Products/Products.jsx';
+import Categories from '../Categories/Categories.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import './Home.css';
@@ -126,7 +126,7 @@ export default function Home() {
           {renderDots()}
         </div>
       </div>
-    <Products/>
+    <Categories/>
     <Background/>
     <Card/>
     <About/>

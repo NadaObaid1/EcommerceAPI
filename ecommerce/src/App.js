@@ -4,7 +4,7 @@ import LayOut from './components/LayOut/LayOut.jsx';
 import Home from './components/Home/Home.jsx';
 import Register from './components/Register/Register.jsx';
 import LogIn from './components/LogIn/LogIn.jsx';
-import Products from './components/Products/Products.jsx';
+import Categories from './components/Categories/Categories.jsx';
 import NotFound from './components/NotFound/NotFound.jsx';
 import Background from './components/Background/Background.jsx';
 import About from './components/About/About.jsx';
@@ -34,7 +34,7 @@ export default function App() {
         <Route path="" element={<LayOut user={user} setUser={setUser} />}>
           <Route index element={<Home />} />
           <Route path="Background" element={<Background />} />
-          <Route path="Products" element={<Products />} />
+          <Route path="Categories" element={<Categories/>} />
           <Route path="About" element={<About />} />
           <Route path="contact" element={<Card />} />
           <Route path="Shop" element={<Cart />} />
