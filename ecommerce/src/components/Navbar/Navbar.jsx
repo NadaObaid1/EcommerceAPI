@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
 import {
-  faFacebook,
   faTwitter,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
@@ -18,7 +17,7 @@ const navTextStyle = {
 
 export default function Navbar() {
   const { token } = useContext(AuthContext);
-  const [cartItems, setCartItems] = useState(0); // Initialize cartItems to 0
+  const [cartItems, setCartItems] = useState(0); 
 
   const fetchCartItems = async () => {
     try {
@@ -30,6 +29,7 @@ export default function Navbar() {
       const data = response.data;
       if (data.products) {
         setCartItems(data.count);
+        fetchCartItems();
       }
     } catch (error) {
       console.error('Error fetching cart items:', error);
@@ -201,6 +201,15 @@ export default function Navbar() {
                   style={{ color: Colors.subsecondary, ...navTextStyle }}
                 >
                   About
+                </Link>
+              </li>
+              <li className="nav-item dropdown">
+                <Link
+                  className="nav-link dropdown"
+                  to="/Order"
+                  style={{ color: Colors.subsecondary, ...navTextStyle }}
+                >
+                  Order
                 </Link>
               </li>
               <li className="nav-item dropdown">

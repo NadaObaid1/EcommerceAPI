@@ -17,6 +17,7 @@ import Cart from './components/Cart/Cart.jsx';
 import ForgetPassword from './components/ForgetPassword/ForgetPassword.jsx';
 import Sendcode from './components/SendCode/SendCode.jsx';
 import Profile from './components/Profile/Pofile.jsx';
+import Order from './components/Order/Order.jsx';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -37,16 +38,16 @@ export default function App() {
           <Route path="Categories" element={<Categories/>} />
           <Route path="About" element={<About />} />
           <Route path="contact" element={<Card />} />
-          <Route path="Shop" element={<Cart />} />
-
-          <Route path="/ProductDetails/:productId" element={<ProductDetails/>} />
-  
-          <Route path="ProductDetails" element={<ProductDetails />} />
-          <Route path="ProductsScreen" element={<ProductsScreen />} />
           <Route path="Register" element={<Register />} />
           <Route path="LogIn" element={<LogIn info={saveCurrentUser} />} />
           <Route path="ForgetPassword" element={<ForgetPassword />} />
           <Route path="SendCode" element={<Sendcode />} />
+          <Route path="Shop" element={<Cart />} />
+
+          <Route path="/ProductDetails/:productId" element={<ProductDetails/>} />
+          <Route path="Order" element={<Order />} />
+          <Route path="ProductDetails" element={<ProductDetails />} />
+          <Route path="ProductsScreen" element={<ProductsScreen />} />
           <Route path="Profile" element={<Profile />} />
           <Route path="Footer" element={<Footer />} />
           <Route path="*" element={<NotFound />} />
